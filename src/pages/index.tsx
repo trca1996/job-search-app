@@ -2,6 +2,11 @@ import Head from "next/head";
 import Search from "../components/Search";
 
 export default function Home() {
+  const onSubmit = (e: React.SyntheticEvent, value: string) => {
+    e.preventDefault();
+    console.log(value);
+  };
+
   return (
     <div className="flex flex-col p-2 lg:px-32 md:px-24">
       <Head>
@@ -23,6 +28,7 @@ export default function Home() {
           icon="work_outline"
           placeholder="Title, companies, expertise or benefits"
           button
+          handleSubmit={onSubmit}
         />
       </div>
 
