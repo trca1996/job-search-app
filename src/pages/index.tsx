@@ -12,15 +12,20 @@ export default function Home() {
           rel="stylesheet"
         ></link>
       </Head>
+
       <h1 className="mb-6 font-bold text-black font-poppins text-2xl">
         JOBS
         <span className="text-gray-600 text-sm">ss</span>
       </h1>
-      <Search
-        icon="work_outline"
-        placeholder="Title, companies, expertise or benefits"
-        button
-      />
+
+      <div className="bg-search-img w-full py-10 px-5 rounded-xl max-w-screen-lg flex justify-center">
+        <Search
+          icon="work_outline"
+          placeholder="Title, companies, expertise or benefits"
+          button
+        />
+      </div>
+
       <div>
         <div></div>
         <div></div>
