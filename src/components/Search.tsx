@@ -12,7 +12,7 @@ const Search = (props: SearchProps) => {
     <div
       className={`flex justify-between items-center bg-white py-${
         props.paddingY || 1
-      } px-1 rounded max-w-3xl flex-grow`}
+      } px-1 rounded max-w-3xl flex-grow shadow`}
     >
       <div className="flex items-center pl-5">
         <span className="material-icons text-gray-400">{props.icon}</span>
