@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 
 interface getDataProps {
   page?: number;
@@ -33,10 +34,15 @@ export const getData = async ({
       headers: {
         Authorization: `Token ${process.env.NEXT_PUBLIC_API_KEY}`,
       },
+      paramsSerializer: (params) => {
+        return qs.stringify(params, { encode: false });
+      },
     }
   );
 
   const data = response.data.results;
+
+  if (!response.data.count) return { count: 0, jobs: [] };
 
   const finalResults = data.slice(skip, resultPerPage + skip);
   const { count } = response.data;

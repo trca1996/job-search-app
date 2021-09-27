@@ -6,31 +6,60 @@ import { getData } from "../api/getData";
 
 import JobCard from "../components/JobCard";
 import { Pagination } from "@mui/material";
+import getSlug from "../helper/getSlug";
 
-interface dataState {
+interface DataState {
   count: number;
   jobs: [];
 }
 
+interface SearchOptionsState {
+  location: string;
+  employment_type: string;
+  remote: boolean | string;
+}
+
+const initialSearchOptions = {
+  location: "",
+  employment_type: "",
+  remote: "",
+};
+
 export default function Home() {
-  const [data, setData] = useState<dataState | null>(null);
+  const [data, setData] = useState<DataState | null>(null);
   const [page, setPage] = useState(1);
+
+  const [searchOptions, setSearchOptions] =
+    useState<SearchOptionsState>(initialSearchOptions);
+  const [search, setSearch] = useState("");
+
+  const resultPerPage = 5;
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
+  const resetPage = () => {
+    setPage(1);
+  };
+
   useEffect(() => {
-    getData({ resultPerPage: 5, page: 1 }).then((res) => {
+    getData({
+      resultPerPage,
+      page: page,
+      location: searchOptions.location,
+      employment_type: searchOptions.employment_type,
+      remote: searchOptions.remote,
+      search: search,
+    }).then((res) => {
       setData(res);
     });
-  }, []);
-
-  console.log(data);
+  }, [page, searchOptions, search]);
 
   const onHeaderSearch = (e: React.SyntheticEvent, value: string) => {
     e.preventDefault();
-    console.log(value);
+    setSearch(getSlug(value));
+    resetPage();
   };
 
   return (
@@ -60,8 +89,8 @@ export default function Home() {
       </div>
 
       <div className="my-6 lg:flex">
-        <SearchOptions />
-        <div className="lg:px-7 lg:py-0 py-7 flex-1">
+        <SearchOptions setOptions={setSearchOptions} resetPage={resetPage} />
+        <div className="lg:pl-7 lg:py-0 py-7 flex-1">
           {data
             ? data.jobs.map((job: any) => (
                 <JobCard
@@ -77,7 +106,7 @@ export default function Home() {
               ))
             : "Loading..."}
           <Pagination
-            count={data ? data.count : 10}
+            count={data ? Math.floor(data.count / resultPerPage) : 10}
             page={page}
             onChange={handleChange}
             variant="outlined"

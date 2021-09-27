@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import getSlug from "../helper/getSlug";
 import Search from "./Search";
 
 type Inputs = {
@@ -8,16 +9,35 @@ type Inputs = {
   location: string;
 };
 
-const SearchOptions = () => {
+interface SearchOptionsState {
+  location: string;
+  employment_type: string;
+  remote: boolean | string;
+}
+
+interface SearchOptionsProps {
+  setOptions: Dispatch<SetStateAction<SearchOptionsState>>;
+  resetPage: () => void;
+}
+
+const SearchOptions = ({ setOptions, resetPage }: SearchOptionsProps) => {
   const [searchString, setSearchString] = useState<string>("");
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const allData = {
-      ...data,
-      searchString,
-    };
-    console.log(allData);
+    const location = searchString
+      ? getSlug(searchString)
+      : data.location
+      ? getSlug(data.location)
+      : "";
+    const employment_type = data.fullTime ? "full+time" : "";
+    const remote = data.remote ? data.remote : "";
+    resetPage();
+    setOptions({
+      location,
+      employment_type,
+      remote,
+    });
   };
 
   return (
