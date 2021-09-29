@@ -75,7 +75,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col py-2 px-3 lg:px-32 md:px-24">
+    <div className="flex flex-col py-2 px-3 lg:px-32 md:px-24 font-poppins">
       <Head>
         <title>Find Job</title>
         <link rel="icon" href="/favicon.ico" />
@@ -85,7 +85,7 @@ export default function Home() {
         ></link>
       </Head>
 
-      <h1 className="mb-6 font-bold text-black font-poppins text-2xl">
+      <h1 className="mb-6 font-bold text-black text-2xl">
         JOBS
         <span className="text-gray-600 text-sm">ss</span>
       </h1>
@@ -119,6 +119,8 @@ export default function Home() {
                   logo={job.logo}
                   datePosted={job.date_posted}
                   remote={job.remote}
+                  description={job.text}
+                  jobUrl={job.url}
                 />
               ))
             : !loading && <div>There is no jobs for this search</div>}

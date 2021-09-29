@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import dateFormat from "dateformat";
+import { useRouter } from "next/router";
+import formatDate from "../helper/formatDate";
 
-interface jobCardProps {
+export interface jobCardProps {
   role: string;
   companyName: string;
   employmentType: string | null;
@@ -9,6 +10,8 @@ interface jobCardProps {
   logo: string | null;
   datePosted: string;
   remote: boolean | null;
+  description: string;
+  jobUrl: string | undefined;
 }
 
 const JobCard = ({
@@ -19,21 +22,32 @@ const JobCard = ({
   logo,
   datePosted,
   remote,
+  description,
+  jobUrl,
 }: jobCardProps) => {
+  const router = useRouter();
   const [imageLoader, setImageLoader] = useState(true);
 
-  const formatDate = (date: string) => {
-    const currentDate = Date.now();
-    const diffTime = Math.abs(currentDate - Date.parse(date));
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 1) return "day ago";
-    if (diffDays <= 10) return `${diffDays} days ago`;
-    return dateFormat(date, "mmmm dS");
-  };
-
   return (
-    <div className="p-3 shadow-md rounded flex flex-col">
+    <div
+      className="p-3 shadow-md rounded flex flex-col cursor-pointer font-roboto"
+      onClick={() =>
+        router.push({
+          pathname: "/details",
+          query: {
+            role,
+            companyName,
+            employmentType,
+            location,
+            logo,
+            datePosted,
+            remote,
+            description,
+            jobUrl,
+          },
+        })
+      }
+    >
       <div className="flex gap-3">
         {logo && imageLoader ? (
           <div className="rounded w-24 h-24 overflow-hidden">
@@ -51,8 +65,8 @@ const JobCard = ({
         )}
 
         <div className="mb-4 flex-1">
-          <p className="font-bold font-roboto text-xs mb-2">{companyName}</p>
-          <p className="font-roboto font-normal text-base mb-3">{role}</p>
+          <p className="font-bold text-xs mb-2">{companyName}</p>
+          <p className="font-normal text-base mb-3">{role}</p>
           <div className="flex gap-1">
             {employmentType && (
               <div className="mini-card">{employmentType}</div>
