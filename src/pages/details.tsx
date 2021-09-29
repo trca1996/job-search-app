@@ -22,7 +22,7 @@ const details = () => {
   return (
     <div className="flex flex-col py-2 px-3 lg:px-32 md:px-24 font-poppins">
       <Head>
-        <title>Find Job</title>
+        <title>{`${role}`}</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
