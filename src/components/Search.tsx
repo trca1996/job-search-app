@@ -41,6 +41,7 @@ const Search = ({
               placeholder={placeholder}
               value={searchString}
               onChange={(e) => setSearchString(e.target.value)}
+              autoComplete="off"
             />
           </div>
           {button && (
@@ -67,6 +68,7 @@ const Search = ({
               placeholder={placeholder}
               value={value}
               onChange={(e) => onChange(e.target.value)}
+              autoComplete="off"
             />
             {button && (
               <button

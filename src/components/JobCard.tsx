@@ -33,24 +33,24 @@ const JobCard = ({
   };
 
   return (
-    <div className="p-3 mb-5 shadow-md rounded flex">
-      {logo && imageLoader ? (
-        <div className="rounded w-24 h-24 overflow-hidden">
-          <img
-            className="w-full h-full"
-            src={logo}
-            alt="logo"
-            onError={() => setImageLoader(false)}
-          />
-        </div>
-      ) : (
-        <div className="rounded  w-24 h-24 flex items-center justify-center text-center bg-gray-200 text-gray-400">
-          Not found.
-        </div>
-      )}
+    <div className="p-3 shadow-md rounded flex flex-col">
+      <div className="flex gap-3">
+        {logo && imageLoader ? (
+          <div className="rounded w-24 h-24 overflow-hidden">
+            <img
+              className="w-full h-full"
+              src={logo}
+              alt="logo"
+              onError={() => setImageLoader(false)}
+            />
+          </div>
+        ) : (
+          <div className="rounded  w-24 h-24 flex items-center justify-center text-center bg-gray-200 text-gray-400">
+            Not found.
+          </div>
+        )}
 
-      <div className="flex flex-col mx-4 w-full justify-between">
-        <div className="mb-4">
+        <div className="mb-4 flex-1">
           <p className="font-bold font-roboto text-xs mb-2">{companyName}</p>
           <p className="font-roboto font-normal text-base mb-3">{role}</p>
           <div className="flex gap-1">
@@ -61,19 +61,19 @@ const JobCard = ({
             {remote && <div className="mini-card">Remote</div>}
           </div>
         </div>
+      </div>
 
-        <div className="flex text-gray-400 items-center gap-3 self-end">
-          {location && (
-            <div className="flex items-center gap-1">
-              <span className="material-icons">public</span>
-              {location}
-            </div>
-          )}
-
-          <div className="flex items-center gap-1">
-            <span className="material-icons">schedule</span>
-            {formatDate(datePosted)}
+      <div className="flex text-gray-400 items-center gap-3 justify-between sm:self-end">
+        {location && (
+          <div className="flex items-center gap-1 text-xs xl:text-base">
+            <span className="material-icons">public</span>
+            {location}
           </div>
+        )}
+
+        <div className="flex items-center gap-1 text-xs xl:text-base">
+          <span className="material-icons">schedule</span>
+          <p className="w-max">{formatDate(datePosted)}</p>
         </div>
       </div>
     </div>

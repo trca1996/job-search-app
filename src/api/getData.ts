@@ -21,35 +21,40 @@ export const getData = async ({
   const actualPage = Math.ceil(page / (100 / resultPerPage)) || 1;
   const skip = ((page - 1) % (100 / resultPerPage)) * resultPerPage;
 
-  const response = await axios.get(
-    "https://mycorsproxy-it.herokuapp.com/https://findwork.dev/api/jobs/",
-    {
-      params: {
-        page: actualPage,
-        search,
-        remote,
-        location,
-        employment_type,
-      },
-      headers: {
-        Authorization: `Token ${process.env.NEXT_PUBLIC_API_KEY}`,
-      },
-      paramsSerializer: (params) => {
-        return qs.stringify(params, { encode: false });
-      },
-    }
-  );
+  try {
+    const response = await axios.get(
+      "https://mycorsproxy-it.herokuapp.com/https://findwork.dev/api/jobs/",
+      {
+        params: {
+          page: actualPage,
+          search,
+          remote,
+          location,
+          employment_type,
+        },
+        headers: {
+          Authorization: `Token ${process.env.NEXT_PUBLIC_API_KEY}`,
+        },
+        paramsSerializer: (params) => {
+          return qs.stringify(params, { encode: false });
+        },
+      }
+    );
 
-  const data = response.data.results;
+    const data = response.data.results;
 
-  if (!response.data.count) return { count: 0, jobs: [] };
+    if (!response.data.count) return { count: 0, jobs: [] };
 
-  const finalResults = data.slice(skip, resultPerPage + skip);
-  const { count } = response.data;
-  // console.log("PAGE: " + page);
-  // console.log("ACTUALPAGE: " + actualPage);
-  // console.log("SKIP: " + skip);
-  // console.log(finalResults);
+    const finalResults = data.slice(skip, resultPerPage + skip);
+    const { count } = response.data;
 
-  return { count, jobs: finalResults };
+    // console.log("PAGE: " + page);
+    // console.log("ACTUALPAGE: " + actualPage);
+    // console.log("SKIP: " + skip);
+    // console.log(finalResults);
+
+    return { count, jobs: finalResults };
+  } catch (err: any) {
+    return err;
+  }
 };
