@@ -4,7 +4,7 @@ interface SearchProps {
   icon: string;
   placeholder: string;
   button?: boolean;
-  paddingY?: "2" | "3" | "4" | "5";
+  paddingY?: "1" | "2" | "3" | "4" | "5";
   handleSubmit?: (e: React.SyntheticEvent, value: string) => void;
   isForm?: boolean;
   value?: string;

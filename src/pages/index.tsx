@@ -97,6 +97,7 @@ export default function Home() {
           button
           handleSubmit={onHeaderSearch}
           isForm
+          paddingY='1'
         />
       </div>
 
