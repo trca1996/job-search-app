@@ -66,7 +66,7 @@ $ git clone https://github.com/trca1996/job-search-app.git
 $ npm install
 
 # Run the app
-$ npm start
+$ npm run dev
 ```
 
 ## Contact
