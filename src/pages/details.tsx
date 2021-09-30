@@ -92,7 +92,7 @@ const details = () => {
                 />
               </div>
             ) : (
-              <div className="rounded  w-11 h-11 flex items-center justify-center text-center bg-gray-200 text-gray-400">
+              <div className="rounded  w-11 h-11 flex items-center justify-center text-center bg-gray-200 text-gray-400 text-xs">
                 Not found.
               </div>
             )}

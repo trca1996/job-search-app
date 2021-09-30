@@ -28,9 +28,7 @@ const Search = ({
       {isForm ? (
         <form
           onSubmit={(e) => handleSubmit(e, searchString)}
-          className={`flex items-center bg-white py-${
-            paddingY || 1
-          } px-1 rounded max-w-3xl flex-grow shadow-lg`}
+          className={`flex items-center bg-white py-1 px-1 rounded max-w-3xl flex-grow shadow-lg`}
         >
           <div className="flex items-center pl-5 flex-grow">
             <span className="material-icons text-gray-400">{icon}</span>
