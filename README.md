@@ -6,15 +6,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://naughty-ride-dbbd7d.netlify.app/">
+    <a href="https://job-search-app-trca1996.vercel.app/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://naughty-ride-dbbd7d.netlify.app/">
+    <a href="https://job-search-app-trca1996.vercel.app/">
       Solution
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/challenges/hH6PbOHBdPm6otzw2De5">
+    <a href="https://devchallenges.io/challenges/TtUjDt19eIHxNQ4n5jps">
       Challenge
     </a>
   </h3>
@@ -40,6 +40,9 @@
 
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
 
+- [NextJS](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Tailwindcss](https://tailwindcss.com/)
 - [React Hook Form](https://react-hook-form.com/get-started/)
 - [Material-UI](https://material-ui.com/)
 
